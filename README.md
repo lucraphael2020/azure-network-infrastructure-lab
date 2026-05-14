@@ -477,20 +477,25 @@ Création du groupe de ressources :
 $location = '<Azure_region>'
 $rgName = 'AZ800-L0801-RG'
 New-AzResourceGroup -Name $rgName -Location $location
+````
 Déploiement ARM :
 
-powershell
+```powershell
 New-AzResourceGroupDeployment `
    -ResourceGroupName $rgName `
    -TemplateFile $HOME/L08-rg_template.json `
    -TemplateParameterFile $HOME/L08-rg_template.parameters.json
+
+```
 Activation du routage sur la VM Hub :
 
-powershell
+````powershell
 Install-WindowsFeature RemoteAccess -IncludeManagementTools
 Install-WindowsFeature -Name Routing -IncludeAllSubFeature
 Install-RemoteAccess -VpnType RoutingOnly
 Get-NetAdapter | Set-NetIPInterface -Forwarding Enabled
+
+````
 ⚙️ Exercice 2 — Résolution DNS dans Azure
 🔹 DNS privé (Private DNS Zone)
 Création de la zone : contoso.org
@@ -508,13 +513,16 @@ Ajout d’un enregistrement A (ex : www)
 
 Test via nslookup :
 
-powershell
+````powershell
 nslookup www.<domain> <NameServer1>
+````
 🧹 Exercice 3 — Déprovisionnement de l’environnement
 Suppression des ressources :
 
-powershell
+````powershell
 Get-AzResourceGroup -Name 'AZ800-L08*' | Remove-AzResourceGroup -Force -AsJob
+
+``````
 📁 Structure recommandée du dépôt
 Code
 azure-network-infrastructure-lab/
